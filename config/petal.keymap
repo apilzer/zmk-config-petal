@@ -102,18 +102,20 @@
             flavor = "tap-preferred";
         };
 
-        caps_word_shift: caps_word_shift {
-            compatible = "zmk,behavior-tap-dance";
-            label = "CAPS_WORD_SHIFT";
-            #binding-cells = <0>;
-            bindings = <&caps_word>, <&kp LEFT_SHIFT>;
-        };
-
         mo1_sl4: mo1_sl4 {
             compatible = "zmk,behavior-tap-dance";
             label = "MO1_SL4";
             #binding-cells = <0>;
             bindings = <&mo 1>, <&sl 4>;
+        };
+
+        caps_word_hold: caps_word_hold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "CAPS_WORD_HOLD";
+            bindings = <&kp>, <&caps_word>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
         };
     };
 
@@ -133,7 +135,7 @@
             bindings = <
 &auto_shift TILDE ESCAPE           &kp K_MUTE                         &kp C_VOLUME_DOWN                  &kp C_VOLUME_UP                    &kp LEFT_PARENTHESIS     &kp RIGHT_PARENTHESIS              &kp C_BRIGHTNESS_DEC   &kp C_BRIGHTNESS_INC                       &auto_shift LS(MINUS) MINUS                  &auto_shift LS(EQUAL) EQUAL
 &auto_shift LS(NUMBER_1) NUMBER_1  &auto_shift LS(NUMBER_2) NUMBER_2  &auto_shift LS(NUMBER_3) NUMBER_3  &auto_shift LS(NUMBER_4) NUMBER_4  &auto_shift LS(N5) N5    &auto_shift LS(NUMBER_6) NUMBER_6  &auto_shift LS(N7) N7  &auto_shift LS(N8) N8                      &auto_shift LS(N9) N9                        &auto_shift LS(N0) N0
-&caps_word_shift                   &kp K_PREV                         &kp K_PP                           &kp K_NEXT                         &kp LEFT_BRACE           &kp RIGHT_BRACE                    &trans                 &auto_shift LS(LEFT_BRACKET) LEFT_BRACKET  &auto_shift LS(RIGHT_BRACKET) RIGHT_BRACKET  &auto_shift LS(BACKSLASH) BACKSLASH
+&caps_word_hold LEFT_SHIFT 0       &kp K_PREV                         &kp K_PP                           &kp K_NEXT                         &kp LEFT_BRACE           &kp RIGHT_BRACE                    &trans                 &auto_shift LS(LEFT_BRACKET) LEFT_BRACKET  &auto_shift LS(RIGHT_BRACKET) RIGHT_BRACKET  &auto_shift LS(BACKSLASH) BACKSLASH
                                                                       &kp LEFT_CONTROL                   &trans                             &kp BACKSPACE            &kp TAB                            &trans                 &trans
             >;
         };
@@ -161,7 +163,7 @@
 &trans          &trans  &trans                  &trans  &trans    &trans   &trans   &trans        &trans  &trans
 &kp F1          &kp F2  &kp F3                  &kp F4  &kp F5    &kp F6   &kp F7   &kp F8        &kp F9  &kp F10
 &kp LEFT_SHIFT  &trans  &trans                  &trans  &trans    &kp F11  &kp F12  &trans        &trans  &trans
-                        &control_gui_tap_dance  &trans  &trans    &trans   &trans   &kp LEFT_ALT
+                        &control_gui_tap_dance  &to 0   &trans    &trans   &trans   &kp LEFT_ALT
             >;
         };
 
